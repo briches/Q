@@ -1,9 +1,0 @@
-package com.example.queue;
-
-public class coffeeData {
-	private String loc;
-	private String time;
-	private String count;
-	private String delta;
-	
-}
