@@ -260,3 +260,15 @@ Binding(CTRL+SHIFT+\,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-02-08 19:28:36.726
+!MESSAGE fragment_home_screen_dummy.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-02-08 19:28:36.733
+!MESSAGE fragment_home_screen_dummy.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-02-08 19:28:36.737
+!MESSAGE fragment_home_screen_dummy.xml: Failed to find style 'textViewStyle' in current theme
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2014-02-08 19:28:36.742
+!MESSAGE fragment_home_screen_dummy.xml: Failed to find style 'textViewStyle' in current theme
