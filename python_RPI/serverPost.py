@@ -60,13 +60,13 @@ while 1:
 	sn[myKeys[0]]['loc'] = thisLocation
 	sn[myKeys[0]]['count'] = matches
 	
-	delta = [0.,0.,0.,0.]
-	sum = 0.
+	delta = [0.0,0.0,0.0,0.0]
+	sum = 0.0
 	for i in range(0, 4):
-		delta[i] = sn[myKeys[0]]['history'][i+1] - sn[myKeys[0]]['history'][i]
+		delta[i] = float(sn[myKeys[0]]['history'][i+1]) - float(sn[myKeys[0]]['history'][i])
 
 	for i in range(0, 4):
-		sum +=delta[i]
+		sum += delta[i]
 	
 
 	sn[myKeys[0]]['delta'] = sum / 4.0	
@@ -82,4 +82,6 @@ while 1:
 		key = str(key[8-len(key):])
 		print postRequest(key, sn[key]['count'], sn[key]['delta'])
 		time.sleep(2)
+	
+	os.remove('image.jpg')
 	
