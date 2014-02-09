@@ -30,11 +30,11 @@ for i in range(0,3):
 while 1:
 	for i in range(1,dl):
 		time.sleep(3)
-		print postRequest("00000002", str(count[i][1]), str(delta[i][1]))
+		postRequest("00000002", str(count[i][1]), str(delta[i][1]))
 		time.sleep(3)
-		print postRequest("00000001", str(count[i][0]), str(delta[i][0]))
+		postRequest("00000001", str(count[i][0]), str(delta[i][0]))
 		time.sleep(3)
-		print postRequest("00000003", str(count[i][2]), str(delta[i][2]))
+		postRequest("00000003", str(count[i][2]), str(delta[i][2]))
 		time.sleep(3)
-		print postRequest("00000004", str(count[i][3]), str(delta[i][3]))
+		postRequest("00000004", str(count[i][3]), str(delta[i][3]))
 	
