@@ -7,7 +7,7 @@ if(mysqli_connect_errno())
 else
 {
 	/*Prepare*/
-	if(!($statement = mysqli_prepare($con, "SELECT sn, address, lat, lon FROM units WHERE type=?")))
+	if(!($statement = mysqli_prepare($con, "SELECT sn, name, address, lat, lon FROM units WHERE type=?")))
 	{
 		echo "Statement preparation failed";
 		die("Quitting");
@@ -16,7 +16,7 @@ else
 	/*Execute*/
 	mysqli_stmt_bind_param($statement, "s", $_GET[type]);
 	mysqli_stmt_execute($statement);
-	$statement -> bind_result($sn, $addr, $lat, $lon);
+	$statement -> bind_result($sn, $name, $addr, $lat, $lon);
 
 	$serials = array();
 	$data = array();
@@ -24,7 +24,7 @@ else
 	while($statement -> fetch())
 	{
 		$serials[$i] = $sn;
-		$data[$i] = $addr . "," . $lat . "," . $lon;
+		$data[$i] = "{\"name\":\"" . $name . "\",\"addr\":\"" . $addr . "\",\"lat\":\"" . $lat . "\",\"lon\":\"" . $lon . "\"}";
 		$i++;
 	}
 
@@ -37,7 +37,7 @@ else
 								SELECT max(t) FROM sn$serials[$n])";
 		$result = mysqli_query($con, $query);
 		$entry = mysqli_fetch_array($result);
-		echo "\n{\"" . $serials[$n] . "\":{" . "\"loc\":\"" . $data[$n] . "\",\"t\":\"", $entry[t], "\",\"count\":\"" . $entry[count] . "\",\"delta\":\"" . $entry[delta] . "\"}},";
+		echo "\n{\"" . $serials[$n] . "\":{" . "\"loc\":" . $data[$n] . ",\"t\":\"", $entry[t], "\",\"count\":\"" . $entry[count] . "\",\"delta\":\"" . $entry[delta] . "\"}},";
 		$n++;
 	}
 	echo "\n{\"NONE\":\"NONE\"}]}";
