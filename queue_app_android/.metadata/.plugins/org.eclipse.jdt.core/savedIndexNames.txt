@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+C:\Users\K\Documents\GitHub\Q\queue_app_android\.metadata\.plugins\org.eclipse.jdt.core
+1670422053.index
+599181497.index
