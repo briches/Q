@@ -6,6 +6,6 @@
     <string name="hello_world">Hello ladies!</string>
     <string name="button_send">CLICK HERE FOR FAST JAVA!</string>
     <string name="http_get">Getting data!</string>
-    <string name="title_activity_http">HERE'S YOUR JAVA!</string>
+    <string name="title_activity_http">HERE IS YOUR JAVA!</string>
 
 </resources>
