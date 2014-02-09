@@ -1,21 +1,48 @@
 <?php
-$con=mysqli_connect("localhost", "root", "", "QueueDB");
+$con = mysqli_connect("localhost", "default", "", "QueueDB");
 if(mysqli_connect_errno())
 {
-	echo "Could not connect to the database! Error no: " . mysqli_connect_error();
+	echo "There was an error connecting to the SQL database. Sorry about that. Error: " . mysqli_connect_error();
 }
 else
 {
-	$query = "SELECT * FROM $_POST[id]";
-	$result =  mysqli_query($con, $query);
-
-	echo "{";
-	while($row = mysqli_fetch_array($result))
+	/*Prepare*/
+	if(!($statement = mysqli_prepare($con, "SELECT sn, address, lat, lon FROM units WHERE type=?")))
 	{
-		echo "\"" . $row['id'] . "\":{\"count\":\"" . $row['count'] . "\",\"delta\":\"" . $row['delta'] . "\"},";
+		echo "Statement preparation failed";
+		die("Quitting");
 	}
-	echo "\"NULL\":\"NULL\"}";
+	
+	/*Execute*/
+	mysqli_stmt_bind_param($statement, "s", $_GET[type]);
+	mysqli_stmt_execute($statement);
+	$statement -> bind_result($sn, $addr, $lat, $lon);
 
+	$serials = array();
+	$data = array();
+	$i = 0;
+	while($statement -> fetch())
+	{
+		$serials[$i] = $sn;
+		$data[$i] = $addr . "," . $lat . "," . $lon;
+		$i++;
+	}
+
+	$n = 0;
+	
+	echo "{\"devices\":[";
+	while($n < $i)
+	{
+		$query = "SELECT * FROM sn$serials[$n] WHERE t = (
+								SELECT max(t) FROM sn$serials[$n])";
+		$result = mysqli_query($con, $query);
+		$entry = mysqli_fetch_array($result);
+		echo "\n{\"" . $serials[$n] . "\":{" . "\"loc\":\"" . $data[$n] . "\",\"t\":\"", $entry[t], "\",\"count\":\"" . $entry[count] . "\",\"delta\":\"" . $entry[delta] . "\"}},";
+		$n++;
+	}
+	echo "\n{\"NONE\":\"NONE\"}]}";
+	
+	mysqli_stmt_close($statement);	
 	mysqli_close($con);
 }
 ?>
