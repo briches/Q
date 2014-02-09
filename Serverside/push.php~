@@ -13,7 +13,7 @@ else
 
 	if(mysqli_affected_rows($con))
 	{
-		echo "Successfully created an entry for " . $serialno . ".";
+		echo "Successfully created an entry for " . $serialno;
 	}
 	else
 	{
