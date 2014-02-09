@@ -20,4 +20,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/section_label" />
 
+    </ListView>
+
 </RelativeLayout>
