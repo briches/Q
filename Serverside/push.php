@@ -6,21 +6,20 @@ if(mysqli_connect_errno())
 }
 else
 {
-	if($statement = mysqli_prepare($con, "INSERT INTO sn?(count, delta) VALUES (?, ?)")))
+	$serialno = "sn" . mysqli_real_escape_string($con, $_POST[sn]);
+	$count = mysqli_real_escape_string($con, $_POST[count]);
+	$delta = mysqli_real_escape_string($con, $_POST[delta]);
+	mysqli_query($con, "INSERT INTO $serialno(count, delta) VALUES ($count, $delta)");
+
+	if(mysqli_affected_rows($con))
 	{
-		mysqli_stmt_bind_param($statement, "sid", $_POST[sn], $_POST[count], $_POST[delta]);
-
-		mysqli_stmt_execute($statement);
-
-		mysqli_stmt_close($statement);
-		mysqli_close($con);
+		echo "Successfully created an entry for " . $serialno . ".";
 	}
 	else
 	{
-		echo "Could not process the statement :C";
+		echo "Commit failed :C";
 	}
 
-	mysqli_stmt_close($statement);
 	mysqli_close($con);
 }
 ?>
